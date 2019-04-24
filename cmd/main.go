@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"github.com/slack-pomodoro-notifications/internal/config"
+	"github.com/slack-pomodoro-notifications/internal/posting"
 )
 
 func main() {
@@ -19,4 +20,5 @@ func main() {
 	}
 
 	fmt.Println("token from config: ", config)
+	posting.PostingTest(config)
 }
