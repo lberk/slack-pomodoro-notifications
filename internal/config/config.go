@@ -1,12 +1,14 @@
 package config
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"os"
 )
 
 type SlackConfig struct {
-	ClientID      string `json:"clientID,omitempty"`      //App Client ID
+	ClientID      string `json:"clientID"`      //App Client ID
 	ClientSecret  string `json:"clientSecret,omitempty"`  //App Client Secret
 	SigningSecret string `json:"signingSecret,omitempty"` //App Signing Secret
 	Port          string `json:"port,omitempty"`          //Host Port to connect to
@@ -22,6 +24,23 @@ type Config struct {
 	Pomodoro PomodoroConfig
 }
 
+func getSlackConfig(fileContents []byte) SlackConfig {
+	var slack SlackConfig = SlackConfig{"client","secret","signing","80","app.slack.com"}
+	err := json.Unmarshal(fileContents, &slack)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return slack
+}
+
+func getPomodoroConfig(fileContents []byte) PomodoroConfig {
+	var pomodoro PomodoroConfig = PomodoroConfig{25,4}
+	err := json.Unmarshal(fileContents, &pomodoro)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return pomodoro
+}
 func GetAppConfig(configFile string) (Config, error) {
 
 	file, err := os.Open(configFile)
@@ -30,16 +49,12 @@ func GetAppConfig(configFile string) (Config, error) {
 	}
 	defer file.Close()
 
-//	fileContents, err := ioutil.ReadAll(file)
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-	pomodoro := PomodoroConfig{25, 4}
-	slack    := SlackConfig{"foobar","hello","world","80","app.slack.com"}
-	config   := Config{slack,pomodoro}
-	return config, nil
-	
+	fileContents, err := ioutil.ReadAll(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var config Config = Config{getSlackConfig(fileContents),
+		getPomodoroConfig(fileContents)}
+	return config, err
 }
 
-//func GetSlackConfig(r io.Reader) (Config, error) {
-//}

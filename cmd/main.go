@@ -17,9 +17,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-//	err = json.Unmarshal(fileContents, &config)
-//	if err != nil {
-//		log.Fatal(err)
-//	}
+
 	fmt.Println("token from config: ", config)
 }
