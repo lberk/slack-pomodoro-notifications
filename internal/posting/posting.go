@@ -3,9 +3,22 @@ package posting
 import (
 	"fmt"
 	"github.com/slack-pomodoro-notifications/internal/config"
+	"html"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
-func PostingTest(conf config.Config) {
-	fmt.Println("HERE!", conf.Slack.ClientID)
+func Post(conf config.Config) {
+	url := fmt.Sprintf("%s/dnd.setSnooze?token=%s&num_minutes=%d", conf.Slack.Host, html.EscapeString(conf.Slack.Token), conf.Pomodoro.WorkTime)
+	response, err := http.Get(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+	body, err := ioutil.ReadAll(response.Body)
+	response.Body.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s", body) //Should parse this out a bit better
 }
-
