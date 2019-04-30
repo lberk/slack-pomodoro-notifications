@@ -2,7 +2,7 @@ package posting
 
 import (
 	"fmt"
-	"github.com/slack-pomodoro-notifications/internal/config"
+	"github.com/lberk/slack-pomodoro-notifications/internal/config"
 	"html"
 	"io/ioutil"
 	"log"

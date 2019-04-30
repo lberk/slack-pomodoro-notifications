@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"github.com/slack-pomodoro-notifications/internal/config"
-	"github.com/slack-pomodoro-notifications/internal/posting"
+	"github.com/lberk/slack-pomodoro-notifications/internal/config"
+	"github.com/lberk/slack-pomodoro-notifications/internal/posting"
 	"log"
 )
 
