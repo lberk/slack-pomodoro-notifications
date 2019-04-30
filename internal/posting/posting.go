@@ -10,7 +10,7 @@ import (
 )
 
 func Post(conf config.Config) {
-	url := fmt.Sprintf("%s/dnd.setSnooze?token=%s&num_minutes=%d", conf.Slack.Host, html.EscapeString(conf.Slack.Token), conf.Pomodoro.WorkTime)
+	url := fmt.Sprintf("%s/api/dnd.setSnooze?token=%s&num_minutes=%d", conf.Slack.Host, html.EscapeString(conf.Slack.Token), conf.Pomodoro.WorkTime)
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
