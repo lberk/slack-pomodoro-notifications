@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"github.com/lberk/sn/internal/config"
-	"github.com/lberk/sn/internal/posting"
+	"github.com/lberk/sn/pkg/config"
+	"github.com/lberk/sn/pkg/posting"
 	"log"
 )
 
